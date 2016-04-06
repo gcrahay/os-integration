@@ -63,6 +63,18 @@
 		)
 	);
 
+	$help_screen->add_help_tab(
+		array(
+			'title'    => 	__('Android'),
+			'id'       => 	'android_tab',
+			'content'  => 	'<p>' . __('<b>Enable Android</b>: This will enable Android support.') . '</p>' .
+							'<p>' . __('<b>Enable Legacy Android Web App Support</b>: This will enable legacy Web App suppport on Android for your site including load screens.') . '</p>'
+			,
+			'callback' => 	false
+		)
+	);
+
+
 		$help_screen->add_help_tab(
 		array(
 			'title'    => 	__('Advanced'),

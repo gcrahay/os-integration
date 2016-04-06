@@ -76,7 +76,6 @@ function osintegration_add_defaults()
 					'enablefavicon'				=> 'on',
 					'enablelivetile'			=> 'on',
 					'enableios'					=> 'on',
-					'enableandroid'					=> 'on',
 					'rssurl'					=> get_bloginfo( 'rss2_url' ),
 					'localfimage'				=> 'on',
 					'searchbody'				=> 'on',
@@ -721,18 +720,66 @@ if( $options['enablelinkoverride'] )
 		// End iOS.
 
 		// Android support
-		if( $options['enableandroid'] ) 
+		if( $options['enablelegacyandroidwebapp'] ) 
 		{
-			if( $options['enablelegacyandroidwebapp'] ) 
-			{
 ?>
 <!-- For Legacy Android Web App -->
 <meta name="mobile-web-app-capable" content="yes" />
 <?php
-			}
                 }
-                // End Android
+		// End Android
+
+		// HTML5 Web App support
+                if( $options['enablehtml5webapp'] ) 
+                {
+?>
+<!-- For HTML5 Web App -->
+<link rel="manifest" href="/manifest.json">
+<?php
+		}
+                // End HTML5
 	
+	}
+
+// This function outputs a HTML5 Web App manifest file
+function osintegration_output_manifest() 
+	{
+	$options = get_option( OSINTOPTIONNAME );
+	
+	$manifest = array( 'start_url'=> '/', 'display' => 'standalone' );
+	$manifest['name'] = osintegration_getOption( 'title', $options );
+	
+	$icons = array();
+	array_push( $icons, array( 'type' => 'image/png', 'sizes' => '16x16', 'src' => osintegration_getOption( 'img_square_16', $options ) ) );
+	array_push( $icons, array( 'type' => 'image/png', 'sizes' => '32x32', 'src' => osintegration_getOption( 'img_square_32', $options ) ) );
+	array_push( $icons, array( 'type' => 'image/png', 'sizes' => '96x96', 'src' => osintegration_getOption( 'img_square_96', $options ) ) );
+	array_push( $icons, array( 'type' => 'image/png', 'sizes' => '160x160', 'src' => osintegration_getOption( 'img_square_160', $options ) ) );
+	array_push( $icons, array( 'type' => 'image/png', 'sizes' => '196x196', 'src' => osintegration_getOption( 'img_square_196', $options ) ) );
+	
+	$manifest['icons'] = $icons;
+	//return wp_send_json( $manifest );
+	//$json_data = wp_json_encode( $manifest, JSON_UNESCAPED_SLASHES );
+	@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+    	echo wp_json_encode( $manifest, JSON_UNESCAPED_SLASHES );
+    	if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+        	wp_die();
+    	else
+        	die;
+	//wp_send_json( $manifest );
+	}
+
+// This function intercepts the 404 raised when the manifest is requested
+function template_redirect_manifest( $template )
+	{
+	global $wp;
+
+	if ( is_404() && $wp->request == 'manifest.json' ) {
+		$options = get_option( OSINTOPTIONNAME );
+		if ( $options['enablehtml5webapp'] ) {
+			return osintegration_output_manifest();
+		}
+	}
+	return $template;
 	}
 
 // This function will take two images ($first and $second) and overlay $second on to $first at $x/$y co-ordinates.
@@ -1125,3 +1172,6 @@ if( isset( $_GET['page']) && $_GET['page'] == 'os-integration/os-integration.php
 add_action( 'wp_head', 'osintegration_output' );
 add_action( 'admin_head', 'osintegration_output' );
 add_action( 'init', 'osintegration_wpinit' );
+
+// Setup the manifest.json
+add_action( 'template_redirect', 'template_redirect_manifest' );

@@ -67,15 +67,23 @@
 		array(
 			'title'    => 	__('Android'),
 			'id'       => 	'android_tab',
-			'content'  => 	'<p>' . __('<b>Enable Android</b>: This will enable Android support.') . '</p>' .
-							'<p>' . __('<b>Enable Legacy Android Web App Support</b>: This will enable legacy Web App suppport on Android for your site including load screens.') . '</p>'
+			'content'  => 	'<p>' . __('<b>Enable Legacy Android Web App Support</b>: This will enable legacy Web App suppport on Android for your site including load screens.') . '</p>'
 			,
 			'callback' => 	false
 		)
 	);
 
+        $help_screen->add_help_tab(
+                array(
+                        'title'    =>   __('HTML5'),
+                        'id'       =>   'html5_tab',
+                        'content'  =>   '<p>' . __('<b>Enable HTML5 Web App Support</b>: This will enable HTML5 Web App suppport for your site and serve the manifest.json file.') . '</p>'
+                        ,
+                        'callback' =>   false
+                )
+        );
 
-		$help_screen->add_help_tab(
+	$help_screen->add_help_tab(
 		array(
 			'title'    => 	__('Advanced'),
 			'id'       => 	'advanced_tab',

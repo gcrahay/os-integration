@@ -34,6 +34,7 @@
 				<li><a href="#fragment-3"><span><?php _e('Windows');?></span></a></li>
 				<li><a href="#fragment-4"><span><?php _e('iOS');?></span></a></li>
                                 <li><a href="#fragment-4b"><span><?php _e('Android');?></span></a></li>
+                                <li><a href="#fragment-4c"><span><?php _e('HTML5');?></span></a></li>
 				<li><a href="#fragment-5"><span><?php _e('Advanced');?></span></a></li>
 				<li><a href="#fragment-6"><span><?php _e('About');?></span></a></li>
 			</ul>
@@ -290,12 +291,6 @@
                         <div id="fragment-4b">
 				<table class="form-table">
 					<tr>
-						<th scope="row">Enable Android Support</th>
-						<td>
-							<input type="checkbox" id="enableandroid" name="osintegration_options[enableandroid]"<?php if( $options['enableandroid'] ) { echo " CHECKED"; } ?>/>
-						</td>
-					</tr>
-					<tr>
 						<th scope="row">Enable Legacy Android Web App Support</th>
 						<td>
 							<input type="checkbox" id="enablelegacyandroidwebapp" name="osintegration_options[enablelegacyandroidwebapp]"<?php if( $options['enablelegacyandroidwebapp'] ) { echo " CHECKED"; } ?>/>
@@ -310,6 +305,24 @@
 					</tr>
 				</table>
 			</div>
+
+			<div id="fragment-4c">
+                                <table class="form-table">
+                                        <tr>
+                                                <th scope="row">Enable HTML5 Web App Support</th>
+                                                <td>
+              							<input type="checkbox" id="enablehtml5webapp" name="osintegration_options[enablehtml5webapp]"<?php if( $options['enablehtml5webapp'] ) { echo " CHECKED"; } ?>/>
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                                <td>
+                                                        <p class="submit">
+                                                                <input type="submit" class="button-primary" value="Save Changes" />
+                                                        </p>
+                                                </td>
+                                        </tr>
+                                </table>
+                        </div>
 			
 			<div id="fragment-5">
 				<table class="form-table">

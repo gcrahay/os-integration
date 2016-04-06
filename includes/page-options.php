@@ -33,6 +33,7 @@
 				<li><a href="#fragment-2"><span><?php _e('Fav Icon');?></span></a></li>
 				<li><a href="#fragment-3"><span><?php _e('Windows');?></span></a></li>
 				<li><a href="#fragment-4"><span><?php _e('iOS');?></span></a></li>
+                                <li><a href="#fragment-4b"><span><?php _e('Android');?></span></a></li>
 				<li><a href="#fragment-5"><span><?php _e('Advanced');?></span></a></li>
 				<li><a href="#fragment-6"><span><?php _e('About');?></span></a></li>
 			</ul>
@@ -274,6 +275,30 @@
 								<option value="1" <?php selected( $options['statusbarstyle'], 1 ); ?>>Black</option>
 								<option value="0" <?php selected( $options['statusbarstyle'], 0 ); ?>>Translucent</option>
 							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="submit">
+								<input type="submit" class="button-primary" value="Save Changes" />
+							</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+                        <div id="fragment-4b">
+				<table class="form-table">
+					<tr>
+						<th scope="row">Enable Android Support</th>
+						<td>
+							<input type="checkbox" id="enableandroid" name="osintegration_options[enableandroid]"<?php if( $options['enableandroid'] ) { echo " CHECKED"; } ?>/>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">Enable Legacy Android Web App Support</th>
+						<td>
+							<input type="checkbox" id="enablelegacyandroidwebapp" name="osintegration_options[enablelegacyandroidwebapp]"<?php if( $options['enablelegacyandroidwebapp'] ) { echo " CHECKED"; } ?>/>
 						</td>
 					</tr>
 					<tr>

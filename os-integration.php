@@ -2,7 +2,7 @@
 /*
 Plugin Name: OS Integration
 Description: Integrate your site in to your users OS, Windows Live Tiles, icons for Apple and Android, iOS Web App!
-Version: 2.0
+Version: 2.0-gcrahay-0
 Plugin URI: http://toolstack.com/os-integration
 Author: Greg Ross
 Author URI: http://toolstack.com
@@ -25,7 +25,7 @@ Plugin Variables and Defines Starts Here
 */
 
 // Define the plugin version.
-DEFINE( 'OSINTVER', '2.0' );
+DEFINE( 'OSINTVER', '2.0-grahay-0' );
 
 // Define the name of the WordPress option to use.
 DEFINE( 'OSINTOPTIONNAME', 'osintegration_options' );
@@ -76,6 +76,7 @@ function osintegration_add_defaults()
 					'enablefavicon'				=> 'on',
 					'enablelivetile'			=> 'on',
 					'enableios'					=> 'on',
+					'enableandroid'					=> 'on',
 					'rssurl'					=> get_bloginfo( 'rss2_url' ),
 					'localfimage'				=> 'on',
 					'searchbody'				=> 'on',
@@ -718,6 +719,19 @@ if( $options['enablelinkoverride'] )
 		
 		} 	
 		// End iOS.
+
+		// Android support
+		if( $options['enableandroid'] ) 
+		{
+			if( $options['enablelegacyandroidwebapp'] ) 
+			{
+?>
+<!-- For Legacy Android Web App -->
+<meta name="mobile-web-app-capable" content="yes" />
+<?php
+			}
+                }
+                // End Android
 	
 	}
 
